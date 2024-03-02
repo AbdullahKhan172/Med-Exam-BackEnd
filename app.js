@@ -1,16 +1,15 @@
 const express = require("express");
 const app = express();
+const someRouter = require("./routes/someRoute");
+
+var cors = require("cors");
+app.use(cors());
 
 app.use((req, res, next) => {
   console.log("Hello from the middleware!!");
   next();
 });
 
-app.use("/", (req, res, next) => {
-  res.status(200).json({
-    status: "success",
-    data: "This is the response from the api",
-  });
-});
+app.use("/", someRouter);
 
 module.exports = app;
